@@ -4,6 +4,7 @@ import SupabaseProvider from '@/providers/SupabaseProvider'
 import UserProvider from '@/providers/UserProvider'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ModalProvider from '@/providers/ModalProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <SupabaseProvider>
           <UserProvider>
+            <ModalProvider/>
             <div className='container'>
               <Navbar/>
               {children}  
