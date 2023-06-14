@@ -7,7 +7,7 @@ const ToasterProvider = () => {
         <Toaster 
             toastOptions={{
                 style: {
-                    background: '#333',
+                    background: '#141414',
                     color: '#fff'                   
                 }
             }}

@@ -64,54 +64,60 @@ const Navbar = () => {
         <p className='font-medium font-serif text-xl hover:opacity-70'>Goodiees</p>
       </Link>
 
-      <Dialog>
-        <DialogTrigger>
-          <CiMenuFries className='md:hidden cursor-pointer text-lg'/>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className='text-start font-medium'>Goodiees</DialogTitle>
-            {/* <DialogDescription>
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-            </DialogDescription> */}
-          </DialogHeader>
-          <ul className='flex flex-col items-start justify-between'>
-            <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/">
-            <CiHome className='text-lg'/>
-              <p className='ms-1'>Home</p>
-            </Link>
-            <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/shop">
-              <CiShop className='text-lg'/>
-              <p className='ms-1'>Shop</p>
-            </Link>
-            {user? (
-              <>
-                <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/cart">
-                  <CiShoppingBasket className='text-lg'/>
-                  <p className='ms-1'>Cart</p>
-                </Link>
+      <div className="flex items-center">
+        {!user? (
+          <button className='text-sm md:hidden bg-[#141414] me-2 px-4 rounded-lg py-2 flex items-center' onClick={authModal.onOpen}>
+            <p className='ms-1 text-white font-semibold'>Log in</p>
+          </button>
+        ) : (
+          <></>
+        )}
 
-                <Link className='text-sm border-t px-2 w-full py-2 flex items-center hover:bg-gray-200' href="/account">
-                  <AiOutlineUser className='text-lg'/>
-                  <p className='ms-1'>Edit profile</p>
-                </Link>
-                <button className='text-sm px-2 py-2 flex w-full items-center hover:bg-gray-200' onClick={handleLogout}>
-                  <IoLogOutOutline className='me-1 text-lg'/>
-                  <p className='ms-1'>Log Out</p>
-                </button>
-              </>
-            ) : (
-              <>
-                <button className='text-sm px-2 py-2 flex w-full items-center hover:bg-gray-200' onClick={authModal.onOpen}>
-                  <IoLogInOutline className='me-1 text-lg'/>
-                  <p className='ms-1'>Log in</p>
-                </button>
-              </>
-            )}
-          </ul>
-        </DialogContent>
-      </Dialog>
+        <Dialog>
+          <DialogTrigger>
+            <CiMenuFries className='md:hidden cursor-pointer text-lg'/>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className='text-start font-medium'>Goodiees</DialogTitle>
+              {/* <DialogDescription>
+                This action cannot be undone. This will permanently delete your account
+                and remove your data from our servers.
+              </DialogDescription> */}
+            </DialogHeader>
+            <ul className='flex flex-col items-start justify-between'>
+              <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/">
+              <CiHome className='text-lg'/>
+                <p className='ms-1'>Home</p>
+              </Link>
+              <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/shop">
+                <CiShop className='text-lg'/>
+                <p className='ms-1'>Shop</p>
+              </Link>
+              {user? (
+                <>
+                  <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/cart">
+                    <CiShoppingBasket className='text-lg'/>
+                    <p className='ms-1'>Cart</p>
+                  </Link>
+
+                  <Link className='text-sm border-t px-2 w-full py-2 flex items-center hover:bg-gray-200' href="/account">
+                    <AiOutlineUser className='text-lg'/>
+                    <p className='ms-1'>Edit profile</p>
+                  </Link>
+                  <button className='text-sm px-2 py-2 flex w-full items-center hover:bg-gray-200' onClick={handleLogout}>
+                    <IoLogOutOutline className='me-1 text-lg'/>
+                    <p className='ms-1'>Log Out</p>
+                  </button>
+                </>
+              ) : (
+                <>
+                </>
+              )}
+            </ul>
+          </DialogContent>
+        </Dialog>
+      </div>
 
       <ul className='md:flex items-center justify-between hidden'>
         <Link className='text-sm px-4 py-2 hover:bg-gray-200' href="/">
