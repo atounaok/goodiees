@@ -3,6 +3,7 @@ import React from 'react'
 import { Button } from './ui/button'
 import { AiOutlineUser } from 'react-icons/ai'
 import { IoLogOutOutline } from 'react-icons/io5'
+import { CiShoppingBasket, CiShop } from 'react-icons/ci'
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -19,19 +20,28 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 
+
+
+
+
 const Navbar = () => {
   return (
     <Menubar className='border-none flex justify-between'>
       <Link href="/">
-        <p className='font-medium font-serif italic text-xl hover:opacity-70'>Goodiees</p>
+        <p className='font-medium font-serif text-xl hover:opacity-70'>Goodiees</p>
       </Link>
 
       <ul className='flex items-center justify-between'>
-        <Link className='text-sm px-4 py-2 hover:bg-gray-200' href="/shop">
-          Shop
+        <Link className='text-sm px-4 py-2 hover:bg-gray-200' href="/">
+          Home
         </Link>
-        <Link className='text-sm px-4 py-2 hover:bg-gray-200' href="/cart">
-          Cart
+        <Link className='text-sm px-4 py-2 flex items-center hover:bg-gray-200' href="/shop">
+          <CiShop className='text-lg'/>
+          <p className='ms-1'>Shop</p>
+        </Link>
+        <Link className='text-sm px-4 py-2 flex items-center hover:bg-gray-200' href="/cart">
+          <CiShoppingBasket className='text-lg'/>
+          <p className='ms-1'>Cart</p>
         </Link>
         <MenubarMenu>
           <MenubarTrigger className='hover:opacity-80 cursor-pointer'>
