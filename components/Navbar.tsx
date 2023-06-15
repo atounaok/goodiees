@@ -34,9 +34,7 @@ import useAuthModal from '@/hooks/useAuthModal';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useUser } from '@/hooks/useUser';
 import toast from 'react-hot-toast';
-
-
-
+import Image from 'next/image';
 
 
 
@@ -59,14 +57,14 @@ const Navbar = () => {
   }
 
   return (
-    <Menubar className='border-none flex justify-between'>
+    <Menubar className='border-none bg-transparent text-white flex justify-between'>
       <Link href="/">
         <p className='font-medium font-serif text-xl hover:opacity-70'>Goodiees</p>
       </Link>
 
       <div className="flex items-center">
         {!user? (
-          <button className='text-sm md:hidden bg-[#141414] me-2 px-4 rounded-lg py-2 flex items-center' onClick={authModal.onOpen}>
+          <button className='text-sm md:hidden me-2 px-4 rounded-lg py-2 flex items-center' onClick={authModal.onOpen}>
             <p className='ms-1 text-white font-semibold'>Log in</p>
           </button>
         ) : (
@@ -77,37 +75,34 @@ const Navbar = () => {
           <DialogTrigger>
             <CiMenuFries className='md:hidden cursor-pointer text-lg'/>
           </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className='text-start font-medium'>Goodiees</DialogTitle>
-              {/* <DialogDescription>
-                This action cannot be undone. This will permanently delete your account
-                and remove your data from our servers.
-              </DialogDescription> */}
+          <DialogContent className='h-full flex flex-col'>
+            <DialogHeader className=''>
+              <DialogTitle className='text-start font-medium'>
+                <Link href="/">
+                  Goodiees
+                </Link>   
+              </DialogTitle>
             </DialogHeader>
-            <ul className='flex flex-col items-start justify-between'>
-              <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/">
-              <CiHome className='text-lg'/>
-                <p className='ms-1'>Home</p>
-              </Link>
-              <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/shop">
-                <CiShop className='text-lg'/>
-                <p className='ms-1'>Shop</p>
+            
+            <ul className='flex flex-wrap  items-start gap-2  justify-between'>
+              <Link className='text-xl justify-center rounded-md w-[49%] py-12 flex items-center bg-gray-200' href="/shop">
+                <CiShop className='text-3xl'/>
+                <p className='ms-1 font-extralight'>Shop</p>
               </Link>
               {user? (
                 <>
-                  <Link className='text-sm px-2 py-2 w-full flex items-center hover:bg-gray-200' href="/cart">
-                    <CiShoppingBasket className='text-lg'/>
-                    <p className='ms-1'>Cart</p>
+                  <Link className='justify-center text-xl rounded-md py-12 w-[49%] flex items-center bg-gray-200' href="/cart">
+                    <CiShoppingBasket className='text-3xl'/>
+                    <p className='ms-1 font-extralight'>Cart</p>
                   </Link>
 
-                  <Link className='text-sm border-t px-2 w-full py-2 flex items-center hover:bg-gray-200' href="/account">
-                    <AiOutlineUser className='text-lg'/>
-                    <p className='ms-1'>Edit profile</p>
+                  <Link className='text-xl justify-center rounded-md w-[49%] py-12 flex items-center bg-gray-200' href="/account">
+                    <AiOutlineUser className='text-3xl'/>
+                    <p className='ms-1 font-extralight'>Profile</p>
                   </Link>
-                  <button className='text-sm px-2 py-2 flex w-full items-center hover:bg-gray-200' onClick={handleLogout}>
-                    <IoLogOutOutline className='me-1 text-lg'/>
-                    <p className='ms-1'>Log Out</p>
+                  <button className='text-xl justify-center rounded-md py-12 flex w-[49%] items-center bg-gray-200' onClick={handleLogout}>
+                    <IoLogOutOutline className='me-1 text-3xl'/>
+                    <p className='ms-1 font-extralight'>Log Out</p>
                   </button>
                 </>
               ) : (
@@ -119,11 +114,8 @@ const Navbar = () => {
         </Dialog>
       </div>
 
-      <ul className='md:flex items-center justify-between hidden'>
-        <Link className='text-sm px-4 py-2 hover:bg-gray-200' href="/">
-          Home
-        </Link>
-        <Link className='mx-3 text-sm px-4 py-2 flex items-center hover:bg-gray-200' href="/shop">
+      <ul className='md:flex font-thin items-center justify-between hidden'>
+        <Link className='mx-3 text-sm flex items-center hover:text-neutral-400' href="/shop">
           <CiShop className='text-lg'/>
           <p className='ms-1'>Shop</p>
         </Link>
@@ -131,14 +123,18 @@ const Navbar = () => {
         {user? 
         (
           <>
-            <Link className='text-sm me-3 px-4 py-2 flex items-center hover:bg-gray-200' href="/cart">
+            <Link className='text-sm me-3 flex items-center hover:text-neutral-400' href="/cart">
               <CiShoppingBasket className='text-lg'/>
-              <p className='ms-1'>Cart</p>
+              <p className='ms-1'></p>
             </Link>
             <MenubarMenu>
-              <MenubarTrigger className='hover:opacity-80 cursor-pointer'>
-                <AiOutlineUser className='me-1'/>
-                <p>Profile</p>
+              <MenubarTrigger className='hover:opacity-80 p-0 cursor-pointer'>
+                {user?.user_metadata?.avatar_url ? (<Image className='rounded-sm' src={user?.user_metadata?.avatar_url} width={40} height={40} alt='Avatar' />) : (
+                  <>
+                    <AiOutlineUser className='me-1'/>
+                    <p className='font-thin'>Profile</p>
+                  </>
+                )}
               </MenubarTrigger>
               <MenubarContent>
                 <MenubarItem inset onClick={() => router.push('/account')} className='cursor-pointer'>
@@ -158,8 +154,7 @@ const Navbar = () => {
             <button onClick={authModal.onOpen} className="
               text-neutral-100
               hover:text-neutral-300
-              bg-black px-5 py-2 rounded-md
-              font-medium
+              bg-transparent
             ">
                 Log in
             </button>

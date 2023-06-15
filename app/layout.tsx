@@ -26,7 +26,7 @@ export default function RootLayout({
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider/>
-            <div className='container'>
+            <div className=' md:w-full'>
               <Navbar/>
               {children}  
               <Footer/>
